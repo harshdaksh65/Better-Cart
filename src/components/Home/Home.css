@@ -114,10 +114,30 @@
   color: #ffffff;
   font-size: 0.85rem;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .home-card-button:hover {
   background-color: #ea580c;
+}
+
+.home-card-button.added {
+  background-color: #16a34a;
+}
+
+.home-card-button.added:hover {
+  background-color: #15803d;
+}
+
+.home-card-quantity-pill {
+  background-color: #ffffff;
+  color: #111827;
+  border-radius: 9999px;
+  padding: 0.05rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 
 @media (min-width: 1024px) {

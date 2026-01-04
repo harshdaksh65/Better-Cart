@@ -10,7 +10,7 @@ import "./Home.css";
 
 const Home = () => {
   const [products] = useContext(Productcontext);
-  const { addToCart } = useContext(CartContext);
+  const { cartItems, addToCart } = useContext(CartContext);
   const { search } = useLocation();
   const navigate = useNavigate();
   const params = new URLSearchParams(search);
@@ -97,6 +97,11 @@ const Home = () => {
       <div className="home-products-container">
         {displayedProducts &&
           displayedProducts.map((p, i) => (
+            (() => {
+              const cartItem = cartItems?.find((item) => item.id === p.id);
+              const inCart = !!cartItem;
+              const quantity = cartItem?.quantity ?? 0;
+              return (
             <div
               key={i}
               className="home-card">
@@ -120,13 +125,18 @@ const Home = () => {
                 <span className="home-card-price">${p.price}</span>
                 <button
                   type="button"
-                  className="home-card-button"
+                  className={`home-card-button${inCart ? " added" : ""}`}
                   onClick={() => addToCart(p)}
                 >
-                  Add to cart
+                  {inCart ? "Added to cart" : "Add to cart"}
+                  {inCart && (
+                    <span className="home-card-quantity-pill">{quantity}</span>
+                  )}
                 </button>
               </div>
             </div>
+              );
+            })()
           ))}
       </div>
     </div>
